@@ -258,15 +258,12 @@ ls /home
 <img width="928" height="76" alt="image" src="https://github.com/user-attachments/assets/88325fea-0b62-4d92-b73f-5d9f1965a4bb" />
 
 
-**Check password status:**
+**Check password status and logon:**
 ```bash
 sudo chage -l RussellAKADusty
 ```
 
 <img width="775" height="198" alt="image" src="https://github.com/user-attachments/assets/007e3ea3-8990-456d-966d-bb52acfd9937" />
-
-
-Logging on for the first time:
 
 <img width="723" height="211" alt="image" src="https://github.com/user-attachments/assets/c5b2f7ae-009f-48dc-8b39-d676e1dd14a7" />
 
