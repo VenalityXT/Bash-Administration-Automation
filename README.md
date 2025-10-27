@@ -220,7 +220,20 @@ echo "User $username created successfully." | tee -a "$LOG_FILE"
 
 ---
 
-## **Step 6: Verify Results**
+## **Step 6: Script Execution and Output**
+
+**Run the script:**
+```bash
+sudo ./create_users.sh
+```
+
+**Output:**
+
+<img width="537" height="287" alt="image" src="https://github.com/user-attachments/assets/239b52b4-43f4-4951-8492-9b50433920fc" />
+
+---
+
+## **Step 7: Verify Results**
 
 After execution, verification is done using standard Linux commands.
 
@@ -255,19 +268,6 @@ sudo chage -l RussellAKADusty
 Attempt logon:
 
 <img width="723" height="211" alt="image" src="https://github.com/user-attachments/assets/c5b2f7ae-009f-48dc-8b39-d676e1dd14a7" />
-
----
-
-## **Step 7: Script Execution and Output**
-
-**Run the script:**
-```bash
-sudo ./create_users.sh
-```
-
-**Output:**
-
-<img width="537" height="287" alt="image" src="https://github.com/user-attachments/assets/239b52b4-43f4-4951-8492-9b50433920fc" />
 
 ---
 
