@@ -91,7 +91,7 @@ If that’s true, the script knows you’re not root and stops execution.
 
 ---
 
-### ⚙️ `-ne` (Not Equal)
+#### `-ne` (Not Equal)
 - `-ne` is a **numeric comparison operator** in Bash that means “not equal to.”  
 - It’s part of Bash’s test syntax used inside `[ ]` brackets.  
 - Example comparisons:
@@ -101,7 +101,7 @@ If that’s true, the script knows you’re not root and stops execution.
 
 ---
 
-### 🔒 `exit 13`
+#### `exit 13`
 - The `exit` command stops the script immediately and returns a code to the system.  
 - Exit codes tell the system *why* the script stopped.  
 - `13` is a standard code for **Permission Denied**, used here to indicate that the script failed because it wasn’t run with root privileges.  
@@ -111,7 +111,7 @@ echo $?
 ```
 ---
 
-### 📁 `[ ! -f "$USER_FILE" ]`
+#### `[ ! -f "$USER_FILE" ]`
 This condition checks if the input file (`Users.txt`) **does not exist**.
 
 Let’s break that down:
@@ -126,14 +126,14 @@ If that condition is true, the script prints an error and exits with code `44`.
 
 ---
 
-### ⚙️ `exit 44`
+#### `exit 44`
 - `44` isn’t a predefined code — it’s a **custom exit code** used for clarity.  
 - This lets you quickly identify missing-file errors in logs or during debugging.  
 - By using a nonstandard code like `44`, you can distinguish it from typical OS-level exit codes.
 
 ---
 
-### 🧠 `else`
+#### `else`
 If both checks pass (you’re root and the file exists), the script executes the `else` block:
 ```
 echo "Starting user creation process..."
@@ -143,7 +143,7 @@ This confirms the setup is valid and that the automation can safely continue.
 
 ---
 
-### ✅ Summary
+#### Summary
 
 | Condition | Purpose | Outcome if True | Exit Code |
 |------------|----------|------------------|------------|
