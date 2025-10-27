@@ -101,10 +101,10 @@ If that’s true, the script knows you’re not root and stops execution.
 
 ---
 
-#### `exit 13`
+#### `exit 13/66`
 - The `exit` command stops the script immediately and returns a code to the system.  
 - Exit codes tell the system *why* the script stopped.  
-- `13` is a standard code for **Permission Denied**, used here to indicate that the script failed because it wasn’t run with root privileges.  
+- `13` and `66` are a standard code for **Permission Denied/File not found** respectfully, used here to indicate that the script failed because it wasn’t run with root privileges or that the file referenced is not in the specified directory.  
 - You can see the last exit code in any terminal with:
 ```bash
 echo $?
@@ -123,13 +123,6 @@ So `[ ! -f "$USER_FILE" ]` means:
 > “If the file specified by `$USER_FILE` does not exist, then do the following.”
 
 If that condition is true, the script prints an error and exits with code `44`.
-
----
-
-#### `exit 44`
-- `44` isn’t a predefined code — it’s a **custom exit code** used for clarity.  
-- This lets you quickly identify missing-file errors in logs or during debugging.  
-- By using a nonstandard code like `44`, you can distinguish it from typical OS-level exit codes.
 
 ---
 
