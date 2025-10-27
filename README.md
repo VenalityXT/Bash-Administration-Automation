@@ -79,15 +79,82 @@ else
     echo "---------------------------------"  
 fi
 ```
-**Explanation:**
-- The script must be run as **root** to create or modify system accounts.  
-- If the `Users.txt` file is missing, execution halts safely before making any changes.  
-- The `exit` codes allow easy debugging:  
-  - `13` → insufficient privileges  
-  - `44` → missing input file  
+**Expanded Explanation:**
 
-These checks prevent runtime errors and ensure the script only runs when all prerequisites are met.
+This part of the script ensures that the environment is properly set up before any user accounts are created. It checks that the script is being run with administrative (root) privileges and that the input file containing usernames actually exists. Let’s break it down line by line.
+```bash
+if [ "$EUID" -ne 0 ];
+```
+is checking:  
+> “Is the current user’s effective ID *not equal to 0*?”  
+If that’s true, the script knows you’re not root and stops execution.
 
+---
+
+### ⚙️ `-ne` (Not Equal)
+- `-ne` is a **numeric comparison operator** in Bash that means “not equal to.”  
+- It’s part of Bash’s test syntax used inside `[ ]` brackets.  
+- Example comparisons:
+  - `[ 3 -eq 3 ]` → true (equal)
+  - `[ 3 -ne 5 ]` → true (not equal)
+- In this case, `[ "$EUID" -ne 0 ]` means “if the user ID is not 0.”
+
+---
+
+### 🔒 `exit 13`
+- The `exit` command stops the script immediately and returns a code to the system.  
+- Exit codes tell the system *why* the script stopped.  
+- `13` is a standard code for **Permission Denied**, used here to indicate that the script failed because it wasn’t run with root privileges.  
+- You can see the last exit code in any terminal with:
+```bash
+echo $?
+```
+---
+
+### 📁 `[ ! -f "$USER_FILE" ]`
+This condition checks if the input file (`Users.txt`) **does not exist**.
+
+Let’s break that down:
+- `-f` tests whether a file exists and is a **regular file**.  
+- `!` negates the condition, turning “file exists” into “file does not exist.”  
+- `$USER_FILE` is the variable that holds the path to your input file.  
+
+So `[ ! -f "$USER_FILE" ]` means:  
+> “If the file specified by `$USER_FILE` does not exist, then do the following.”
+
+If that condition is true, the script prints an error and exits with code `44`.
+
+---
+
+### ⚙️ `exit 44`
+- `44` isn’t a predefined code — it’s a **custom exit code** used for clarity.  
+- This lets you quickly identify missing-file errors in logs or during debugging.  
+- By using a nonstandard code like `44`, you can distinguish it from typical OS-level exit codes.
+
+---
+
+### 🧠 `else`
+If both checks pass (you’re root and the file exists), the script executes the `else` block:
+```
+echo "Starting user creation process..."
+echo "---------------------------------"
+```
+This confirms the setup is valid and that the automation can safely continue.
+
+---
+
+### ✅ Summary
+
+| Condition | Purpose | Outcome if True | Exit Code |
+|------------|----------|------------------|------------|
+| `[ "$EUID" -ne 0 ]` | Check if user is not root | Prints error and stops | `13` |
+| `[ ! -f "$USER_FILE" ]` | Check if `Users.txt` is missing | Prints error and stops | `44` |
+| `else` | Both checks passed | Starts the user creation process | — |
+
+In plain English:
+> “If you’re not root, stop with a permission error.  
+> If the username file doesn’t exist, stop with a file error.  
+> Otherwise, start creating users safely.”
 
 ---
 
