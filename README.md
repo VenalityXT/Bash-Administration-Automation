@@ -128,12 +128,9 @@ echo "User $username created successfully." | tee -a "$LOG_FILE"
 - `tee -a` appends each success message to the log file (`Created_Users.log`).  
 - The `-a` flag ensures logs are not overwritten when the script is re-run.
 
-Example log output:
-```
-User RussellAKADusty created successfully.
-User pancake92 created successfully.
-User bluejellyroll created successfully.
-```
+Log output:
+
+<img width="391" height="174" alt="image" src="https://github.com/user-attachments/assets/f8a7b763-23eb-4603-bd72-c09c9a5dd57d" />
 
 ---
 
@@ -156,10 +153,10 @@ id RussellAKADusty
 ls /home
 ```
 
-Example output:
-```
-bluejellyroll  cyberjon  Munbuni  Mvri  nariD  pancake92  RussellAKADusty
-```
+Output:
+
+<img width="928" height="76" alt="image" src="https://github.com/user-attachments/assets/88325fea-0b62-4d92-b73f-5d9f1965a4bb" />
+
 
 **Check password status:**
 ```bash
@@ -167,10 +164,8 @@ sudo chage -l RussellAKADusty
 ```
 
 Output snippet:
-```
-Last password change	: password must be changed
-Password expires	: password must be changed
-```
+
+<img width="736" height="180" alt="image" src="https://github.com/user-attachments/assets/cbe68334-1ff4-489e-bb43-ec944264491c" />
 
 ---
 
