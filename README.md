@@ -38,26 +38,60 @@ This automation script ensures scalable, secure, and consistent user creation.
 
 ## **Step 1: Verify Root Privileges and Input File**
 
-Before performing user operations, the script checks two essential conditions:
+Before performing user operations, the script checks two essential conditions and ensures the `Users.txt` file is properly created and available in the same directory as the script.
 
-**Logic:**
-```bash
-if [ "$EUID" -ne 0 ]; then
-    echo "Error: Please run as root (use sudo)."
-    exit 13
-elif [ ! -f "$USER_FILE" ]; then
-    echo "Error: User file '$USER_FILE' not found!"
-    exit 44
-else
-    echo "Starting user creation process..."
-    echo "---------------------------------"
-fi
-```
+### **Creating the Input File**
+
+First, generate a text file containing all usernames to automate account creation.  
+Use the following command to create the file and populate it with multiple usernames, each on a new line:
+
+echo -e "RusselAKADusty\npancake92\nbluejellyroll\ncyberjon\nariD\nMvri\nMunbuni" > Users.txt
 
 **Explanation:**
-- The script must be run as **root** to create system users.  
-- If the `Users.txt` file is missing, the process stops safely.  
-- The `exit` codes allow clear debugging: `13` (lack of permissions) and `44` (file not found).
+- **`echo -e`** interprets escape sequences like `\n` to insert newlines.  
+- **`>`** writes output to a file (creating it if it doesn’t exist).  
+- Each line represents a unique username that will be processed by the script.  
+
+You can verify that the file exists and contains the correct entries using:
+
+cat Users.txt
+
+**Output Example:**
+RusselAKADusty  
+pancake92  
+bluejellyroll  
+cyberjon  
+ariD  
+Mvri  
+Munbuni  
+
+---
+
+### **Verifying Script Preconditions**
+
+After confirming the file exists, the script automatically checks that it’s running with **root privileges** and that the user file is found before continuing.
+
+**Logic:**
+if [ "$EUID" -ne 0 ]; then  
+    echo "Error: Please run as root (use sudo)."  
+    exit 13  
+elif [ ! -f "$USER_FILE" ]; then  
+    echo "Error: User file '$USER_FILE' not found!"  
+    exit 44  
+else  
+    echo "Starting user creation process..."  
+    echo "---------------------------------"  
+fi
+
+**Explanation:**
+- The script must be run as **root** to create or modify system accounts.  
+- If the `Users.txt` file is missing, execution halts safely before making any changes.  
+- The `exit` codes allow easy debugging:  
+  - `13` → insufficient privileges  
+  - `44` → missing input file  
+
+These checks prevent runtime errors and ensure the script only runs when all prerequisites are met.
+
 
 ---
 
