@@ -53,17 +53,12 @@ echo -e "RusselAKADusty\npancake92\nbluejellyroll\ncyberjon\nariD\nMvri\nMunbuni
 - Each line represents a unique username that will be processed by the script.  
 
 You can verify that the file exists and contains the correct entries using:
-
+```bash
 cat Users.txt
+```
+**Output:**
 
-**Output Example:**
-RusselAKADusty  
-pancake92  
-bluejellyroll  
-cyberjon  
-ariD  
-Mvri  
-Munbuni  
+<img width="908" height="231" alt="image" src="https://github.com/user-attachments/assets/1598de01-742f-4863-97c5-cf8311b2ef12" />
 
 ---
 
