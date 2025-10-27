@@ -142,18 +142,19 @@ After execution, verification is done using standard Linux commands.
 ```bash
 cat Created_Users.log
 ```
+<img width="386" height="176" alt="image" src="https://github.com/user-attachments/assets/a2f4f8ca-9333-47b5-87e0-7644177a372c" />
 
 **Verify account creation:**
 ```bash
 id RussellAKADusty
 ```
 
+<img width="711" height="74" alt="image" src="https://github.com/user-attachments/assets/c11baa9b-3fd9-4c64-848b-407a7339d853" />
+
 **Confirm home directories:**
 ```bash
 ls /home
 ```
-
-Output:
 
 <img width="928" height="76" alt="image" src="https://github.com/user-attachments/assets/88325fea-0b62-4d92-b73f-5d9f1965a4bb" />
 
