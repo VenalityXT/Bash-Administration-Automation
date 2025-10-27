@@ -174,28 +174,16 @@ Password expires	: password must be changed
 
 ---
 
-## **Step 7: Script Execution and Output Example**
+## **Step 7: Script Execution and Output**
 
 **Run the script:**
 ```bash
 sudo ./create_users.sh
 ```
 
-**Example Output:**
-```
-Starting user creation process...
----------------------------------
-User RussellAKADusty created successfully.
-User pancake92 created successfully.
-User bluejellyroll created successfully.
-User cyberjon created successfully.
-User nariD created successfully.
-User Mvri created successfully.
-User Munbuni created successfully.
----------------------------------
-User creation process completed.
-All created users have been logged in Created_Users.log.
-```
+**Output:**
+
+<img width="537" height="287" alt="image" src="https://github.com/user-attachments/assets/239b52b4-43f4-4951-8492-9b50433920fc" />
 
 ---
 
