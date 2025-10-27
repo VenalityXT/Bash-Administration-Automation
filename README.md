@@ -44,9 +44,9 @@ Before performing user operations, the script checks two essential conditions an
 
 First, generate a text file containing all usernames to automate account creation.  
 Use the following command to create the file and populate it with multiple usernames, each on a new line:
-
+```bash
 echo -e "RusselAKADusty\npancake92\nbluejellyroll\ncyberjon\nariD\nMvri\nMunbuni" > Users.txt
-
+```
 **Explanation:**
 - **`echo -e`** interprets escape sequences like `\n` to insert newlines.  
 - **`>`** writes output to a file (creating it if it doesn’t exist).  
