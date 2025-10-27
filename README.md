@@ -67,6 +67,7 @@ cat Users.txt
 After confirming the file exists, the script automatically checks that it’s running with **root privileges** and that the user file is found before continuing.
 
 **Logic:**
+```bash
 if [ "$EUID" -ne 0 ]; then  
     echo "Error: Please run as root (use sudo)."  
     exit 13  
@@ -77,7 +78,7 @@ else
     echo "Starting user creation process..."  
     echo "---------------------------------"  
 fi
-
+```
 **Explanation:**
 - The script must be run as **root** to create or modify system accounts.  
 - If the `Users.txt` file is missing, execution halts safely before making any changes.  
