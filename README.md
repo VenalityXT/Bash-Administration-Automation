@@ -44,7 +44,7 @@ Before performing user operations, the script checks two essential conditions:
 ```bash
 if [ "$EUID" -ne 0 ]; then
     echo "Error: Please run as root (use sudo)."
-    exit 1
+    exit 13
 elif [ ! -f "$USER_FILE" ]; then
     echo "Error: User file '$USER_FILE' not found!"
     exit 44
@@ -57,7 +57,7 @@ fi
 **Explanation:**
 - The script must be run as **root** to create system users.  
 - If the `Users.txt` file is missing, the process stops safely.  
-- The `exit` codes allow clear debugging: `1` (permission) and `44` (file not found).
+- The `exit` codes allow clear debugging: `1` (lack of permissions) and `44` (file not found).
 
 ---
 
