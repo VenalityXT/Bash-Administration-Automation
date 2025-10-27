@@ -13,19 +13,19 @@ LOG_FILE=Created_Users.log
 DEFAULT_PASS="P@ssw0rd!"
 
 # Sanity check for root access and file existance
-if [ "$EUID" -ne 0 ]; then
-	echo "Error: Please run as root (use sudo)."
-	exit 1
-elif [ ! -f "$USER_FILE" ]; then
-	echo "Error: $USER_FILE not found!"
-	exit 44
+if [ "$EUID" -ne 0 ]; then  
+    echo "Error: Please run as root (use sudo)."  
+    exit 13  
+elif [ ! -f "$USER_FILE" ]; then  
+    echo "Error: User file '$USER_FILE' not found!"  
+    exit 44  
+else  
+    echo "Starting user creation process..."  
+    echo "---------------------------------"  
 fi
 
 # Create/clear the log file
 > "$LOG_FILE"
-
-echo "Starting user creation process..."
-echo "---------------------------------"
 
 # IFS= treats each line as its own insteading of seperating it with spaces
 # read -r username reads one line from the file and puts it into the variable username
