@@ -162,9 +162,9 @@ sudo chage -l RussellAKADusty
 
 <img width="775" height="198" alt="image" src="https://github.com/user-attachments/assets/007e3ea3-8990-456d-966d-bb52acfd9937" />
 
-Output snippet:
+Attempt logon:
 
-<img width="736" height="180" alt="image" src="https://github.com/user-attachments/assets/cbe68334-1ff4-489e-bb43-ec944264491c" />
+<img width="723" height="211" alt="image" src="https://github.com/user-attachments/assets/c5b2f7ae-009f-48dc-8b39-d676e1dd14a7" />
 
 ---
 
