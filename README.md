@@ -128,7 +128,7 @@ If that condition is true, the script prints an error and exits with code `44`.
 
 #### `else`
 If both checks pass (you’re root and the file exists), the script executes the `else` block:
-```
+```bash
 echo "Starting user creation process..."
 echo "---------------------------------"
 ```
