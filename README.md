@@ -57,7 +57,7 @@ fi
 **Explanation:**
 - The script must be run as **root** to create system users.  
 - If the `Users.txt` file is missing, the process stops safely.  
-- The `exit` codes allow clear debugging: `1` (lack of permissions) and `44` (file not found).
+- The `exit` codes allow clear debugging: `13` (lack of permissions) and `44` (file not found).
 
 ---
 
