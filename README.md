@@ -191,11 +191,3 @@ This automation project demonstrates the ability to:
 - Verify system changes through **user existence**, **home directory**, and **password expiration** checks.  
 
 By completing this project, I gained hands-on experience in **file processing**, **text stream handling**, **permission management**, and **error control**, all of which are foundational skills for **Linux system administration**.
-
----
-
-## **Tools & References**
-- [Linux Beginners Cheat Sheet](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview)  
-- `useradd`, `chpasswd`, `passwd`, `tee`, and `chage` Linux utilities  
-- [GNU Bash Manual](https://www.gnu.org/software/bash/manual/bash.html)  
-- [File Permissions and Ownership](https://wiki.archlinux.org/title/File_permissions_and_attributes)
