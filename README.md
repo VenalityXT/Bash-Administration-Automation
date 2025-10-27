@@ -104,7 +104,7 @@ If that’s true, the script knows you’re not root and stops execution.
 #### `exit 13/66`
 - The `exit` command stops the script immediately and returns a code to the system.  
 - Exit codes tell the system *why* the script stopped.  
-- `13` and `66` are a standard code for **Permission Denied/File not found** respectfully, used here to indicate that the script failed because it wasn’t run with root privileges or that the file referenced was not in the specified directory.  
+- `13` and `66` are standard codes for **Permission Denied/File not found** respectfully, used here to indicate that the script failed because it wasn’t run with root privileges or that the file referenced was not in the specified directory.  
 - You can see the last exit code in any terminal with:
 ```bash
 echo $?
