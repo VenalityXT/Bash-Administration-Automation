@@ -28,10 +28,7 @@ As a **junior system administrator**, I developed a script that automates **user
 
 ## **Scenario**
 
-You are a **junior Linux system administrator** responsible for onboarding new employees.  
-Your manager has provided you a list of usernames in a text file (`Users.txt`) and requested an automated method to create user accounts with default passwords.  
-Since the list contains hundreds of names, manually creating accounts is inefficient and prone to error.  
-This automation script ensures scalable, secure, and consistent user creation.
+You are a **junior Linux system administrator** responsible for onboarding new employees. Your manager has provided you a list of usernames in a text file (`Users.txt`) and requested an automated method to create user accounts with default passwords. Since the list contains hundreds of names, manually creating accounts is inefficient and prone to error. This automation script ensures scalable, secure, and consistent user creation.
 
 ---
 
