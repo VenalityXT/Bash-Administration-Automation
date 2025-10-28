@@ -201,7 +201,9 @@ For each valid new username, the script executes:
 
 ```bash
 useradd -m "$username" &>/dev/null
+
 echo "${username}:${DEFAULT_PASS}" | chpasswd
+
 passwd -e "$username" &>/dev/null
 ```
 
