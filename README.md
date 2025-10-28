@@ -15,6 +15,8 @@ This project demonstrates the use of **Bash scripting** to automate repetitive s
 
 As a **junior system administrator**, I developed a script that automates **user account creation**, ensuring each new employee receives a consistent and secure environment with unique credentials and home directories. The automation improves onboarding efficiency, minimizes manual errors, and enforces secure practices such as **password expiration**, **error handling**, and **log generation**.
 
+You can view the script [here](./create_users.sh)!
+
 ---
 
 ## **Objectives**
