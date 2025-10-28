@@ -81,9 +81,19 @@ This part of the script ensures that the environment is properly set up before a
 ```bash
 if [ "$EUID" -ne 0 ];
 ```
-is checking:  
-> “Is the current user’s effective ID *not equal to 0*?”  
+Is checking:  
+> “Is the current user’s **Effective User ID** *not equal to 0*?”  
 If that’s true, the script knows you’re not root and stops execution.
+
+- EUID tells the system *who* you are allowed to act as (your current permission level).
+- The **root user** always has a EUID of 0, so this check ensures only root can run privileged actions.
+- Even though EUID isn't defined in the script, it's a build-in shell variable that always exists in Bash and other POSIX shells.
+
+You can view your EUID by running:
+```bash
+id -u/user
+```
+Which outputs your EUID number.
 
 ---
 
