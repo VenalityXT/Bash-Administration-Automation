@@ -93,7 +93,7 @@ You can view your EUID by running:
 ```bash
 id -u/user
 ```
-Which outputs your EUID as well as your GID (Primary Group ID) and groups the user belongs to.
+Which outputs your EUID as well as your GID (Primary Group ID) and any groups the user belongs to.
 
 ---
 
