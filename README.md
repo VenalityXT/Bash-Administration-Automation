@@ -208,9 +208,9 @@ passwd -e "$username" &>/dev/null
 ```
 
 **Explanation:**
-- `useradd -m` creates the user and their home directory.  
-- `chpasswd` securely sets the default password for automation (non-interactive).  
-- `passwd -e` forces a password reset on the next login for security.
+- `useradd -m` creates the user and their home directory with the -m option.  
+- `chpasswd` securely sets the default password for automation using the pipe `|` operator (non-interactive).  
+- `passwd -e` forces a password reset on the next login for security with the -e option.
 
 ---
 
