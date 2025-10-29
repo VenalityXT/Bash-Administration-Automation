@@ -1,4 +1,4 @@
- # **PowerShell Administration Basics**
+# **PowerShell Administration Basics**
 
 [![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows)](https://learn.microsoft.com/en-us/powershell/)  
 [![PowerShell](https://img.shields.io/badge/Scripting-PowerShell-lightblue?logo=powershell)](https://learn.microsoft.com/en-us/powershell/)  
@@ -26,9 +26,21 @@ The script automates the process of monitoring system health, managing file stru
 
 ## **Step 1: Monitor System Processes with `Get-Process`**
 
-The `Get-Process` cmdlet retrieves all running processes on the system. This can be useful for monitoring system health and identifying processes consuming excessive resources. However, the default output can be cluttered, making it hard to analyze effectively.
+The `Get-Process` cmdlet is used to retrieve a list of all running processes on your system. This is useful for monitoring system health and identifying resource-heavy processes. However, the output of `Get-Process` can often be **cluttered and hard to read**, especially when there are many active processes.
 
-To filter and sort the output for better readability:
-```
-Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
-```
+### Initial `Get-Process` Usage
+
+Using `Get-Process` without any additional filtering will display a long list of processes. Below is a screenshot of the output showing all processes:
+
+[Insert Image Here: `getprocess.png`]
+
+As you can see, this output includes a lot of information, making it difficult to quickly identify specific processes.
+
+---
+
+### **Improved Efficiency: Filtering and Sorting the Output**
+
+To make the output more manageable and highlight the most important processes (e.g., those using the most CPU), you can filter and sort the results.
+
+For example, the following command sorts processes by CPU usage and limits the output to the top 10 processes:
+
