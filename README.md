@@ -82,8 +82,8 @@ cd /
 ls
 ```
 
-[Insert Image Here: `S2.png`]  
-[Insert Image Here: `S2.1.png`]  
+<img width="638" height="494" alt="image" src="https://github.com/user-attachments/assets/06fc5e5c-1661-4d40-98c8-f1d5c94da5ce" />
+<img width="307" height="74" alt="image" src="https://github.com/user-attachments/assets/4b8d03f4-9503-406e-9ffb-12e093594275" />
 
 ---
 
@@ -102,8 +102,8 @@ New-Item -Path "C:\PowerShellLab\ServerReport.txt" -ItemType File
 | `-Path`    | Specifies the path where the item is created. | `"C:\PowerShellLab"`      |
 | `-ItemType` | Specifies the type of item to create.    | `Directory`, `File`, `SymbolicLink` |
 
-[Insert Image Here: `S2.2.png`]  
-[Insert Image Here: `baf71df1-f7e3-4581-b6be-7e40944e6e50.png`]  
+<img width="532" height="161" alt="image" src="https://github.com/user-attachments/assets/1d20991a-c246-4bda-8b02-9e03b9a85a63" />
+<img width="549" height="129" alt="image" src="https://github.com/user-attachments/assets/7809e95b-ac45-4f43-a111-8414dd67e838" />
 
 ---
 
@@ -123,8 +123,8 @@ Add-Content -Path "ServerReport.txt" -Value "CPU and Memory check: Normal"
 Get-FileHash -Path "ServerReport.txt"
 ```
 
-[Insert Image Here: `eb949b9d-e420-458c-a48c-9e08a0023416.png`]  
-[Insert Image Here: `S3.2.png`]  
+<img width="976" height="107" alt="image" src="https://github.com/user-attachments/assets/802e216d-69ff-4a8e-bb02-6f4098096c26" />
+<img width="974" height="117" alt="image" src="https://github.com/user-attachments/assets/70cee887-4712-4929-a15f-515ef99fb9f2" />
 
 **Explanation:**
 
