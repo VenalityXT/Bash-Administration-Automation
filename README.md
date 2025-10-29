@@ -1,154 +1,295 @@
-# **PowerShell Administration Basics**
+# **Basic Bash Administration Automation**
 
-[![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows)](https://learn.microsoft.com/en-us/powershell/)  
-[![PowerShell](https://img.shields.io/badge/Scripting-PowerShell-lightblue?logo=powershell)](https://learn.microsoft.com/en-us/powershell/)  
-[![Focus](https://img.shields.io/badge/Focus-System%20Administration-orange)](https://en.wikipedia.org/wiki/System_administrator)  
-[![Tool](https://img.shields.io/badge/Tool-PowerShell%20ISE-green)](https://learn.microsoft.com/en-us/powershell/scripting/core-powershell/ise/using-the-windows-powershell-ise)  
-
+[![Linux](https://img.shields.io/badge/OS-Linux-blue?logo=linux)](https://www.linux.org/)
+[![Bash](https://img.shields.io/badge/Shell-Bash-green?logo=gnubash)](https://www.gnu.org/software/bash/)
+[![Automation](https://img.shields.io/badge/Focus-System%20Automation-orange)](https://en.wikipedia.org/wiki/Automation)
+[![User Management](https://img.shields.io/badge/Module-User%20Management-yellow)](https://www.geeksforgeeks.org/useradd-command-in-linux/)
+[![File Processing](https://img.shields.io/badge/Skill-File%20Processing-lightgrey)](https://en.wikipedia.org/wiki/Input/output)
+[![Security](https://img.shields.io/badge/Concept-Permission%20Control-red)](https://en.wikipedia.org/wiki/File-system_permissions)
+ 
 ---
 
 ## **Project Overview**
 
-This project demonstrates the use of **PowerShell scripting** for essential system administration tasks in a Windows environment. It covers key cmdlets for managing system processes, navigating the file system, creating and modifying files, and performing file integrity checks. These tasks are foundational for **IT operations**, **automation**, and **cybersecurity**.
+This project demonstrates the use of **Bash scripting** to automate repetitive system administration tasks in a Linux environment.
 
-The script automates the process of monitoring system health, managing file structures, and verifying file integrity. By leveraging **PowerShell ISE**, the project focuses on streamlining workflows and ensuring consistency and security through automation.
+As a **junior system administrator**, I developed a script that automates **user account creation**, ensuring each new employee receives a consistent and secure environment with unique credentials and home directories. The automation improves onboarding efficiency, minimizes manual errors, and enforces secure practices such as **password expiration**, **error handling**, and **log generation**.
+
+<p align="left">
+  <a href="./create_users.sh"><strong>View the Script »</strong></a>
+</p>
 
 ---
 
 ## **Objectives**
 
-1. Automate system process monitoring with `Get-Process`.  
-2. Navigate directories and manage files using PowerShell cmdlets (`Get-ChildItem`, `Set-Location`, `New-Item`, `Add-Content`, `Get-Content`).  
-3. Perform file integrity checks with `Get-FileHash` to verify data integrity.  
-4. Develop familiarity with PowerShell ISE for scripting, debugging, and automation.  
+1. Demonstrate the ability to leverage **Bash scripting** for repetitive administrative tasks.  
+2. Minimize errors compared to manual account setup.  
+3. Ensure all created users have consistent and functional accounts.  
+4. Efficiently onboard employees by automating user creation.  
 
 ---
 
-## **Step 1: Monitor System Processes with `Get-Process`**
+## **Scenario**
 
-The `Get-Process` cmdlet is used to retrieve a list of all running processes on your system. This is useful for monitoring system health and identifying resource-heavy processes. However, the output of `Get-Process` can often be **cluttered and hard to read**, especially when there are many active processes.
-
-### Initial `Get-Process` Usage
-
-Using `Get-Process` without any additional filtering will display a long list of processes. Below is a screenshot of the output showing all processes:
-
-<img width="710" height="1008" alt="image" src="https://github.com/user-attachments/assets/8f356e02-cff1-4847-9f2c-ae861f157fcd" />
-
-As you can see, this output includes a lot of information, making it difficult to quickly identify specific processes.
+You are a **junior Linux system administrator** responsible for onboarding new employees. Your manager has provided you a list of usernames in a text file (`Users.txt`) and requested an automated method to create user accounts with default passwords. Since the list contains hundreds of names, manually creating accounts is inefficient and prone to error. This automation script ensures scalable, secure, and consistent user creation.
 
 ---
 
-### **Improved Efficiency: Filtering and Sorting the Output**
+## **Step 1: Verify Root Privileges and Input File**
 
-To make the output more manageable and highlight the most important processes (e.g., those using the most CPU), you can filter and sort the results.
+Before performing user operations, the script checks two essential conditions and ensures the `Users.txt` file is properly created and available in the same directory as the script.
 
-For example, the following command sorts processes by CPU usage and limits the output to the top 10 processes:
+### **Creating the Input File**
+
+First, generate a text file containing all usernames to automate account creation.  
+Use the following command to create the file and populate it with multiple usernames, each on a new line:
+```bash
+echo -e "RusselAKADusty\npancake92\nbluejellyroll\ncyberjon\nariD\nMvri\nMunbuni" > Users.txt
 ```
-Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
+**Explanation:**
+- **`echo -e`** interprets escape sequences like `\n` to insert newlines.  
+- **`>`** writes output to a file (creating it if it doesn’t exist).  
+- Each line represents a unique username that will be processed by the script.  
+
+You can verify that the file exists and contains the correct entries using:
+```bash
+cat Users.txt
 ```
+**Output:**
 
-<img width="722" height="247" alt="image" src="https://github.com/user-attachments/assets/4525e0c7-5520-4db4-aea3-fdd5fbb3e49b" />
-
-**Explanation of Command:**
-
-| Component | Description |
-|-----------|-------------|
-| `Get-Process` | Retrieves all running processes. |
-| `|` | Pipe operator: sends the output of one command to the next. |
-| `Sort-Object CPU -Descending` | Sorts processes by CPU usage in descending order. |
-| `Select-Object -First 10` | Limits the output to the top 10 processes. |
-
-This makes it easier to identify which processes are consuming the most resources, helping administrators focus on key areas of the system.
-
-[Insert Image Here: `getprocess2.png`]  
+<img width="908" height="231" alt="image" src="https://github.com/user-attachments/assets/1598de01-742f-4863-97c5-cf8311b2ef12" />
 
 ---
 
-## **Step 2: Navigate Directories with `Get-ChildItem` and `Set-Location`**
+### **Verifying Script Preconditions**
 
-In PowerShell, `Get-ChildItem` lists the contents of a directory, similar to the `ls` command in Linux. `Set-Location` allows you to navigate between directories, akin to `cd` in Linux.
+After confirming the file exists, the script automatically checks that it’s running with **root privileges** and that the user file is found before continuing.
 
-To list contents and change directories:
+**Logic:**
+```bash
+if [ "$EUID" -ne 0 ]; then  
+    echo "Error: Please run as root (use sudo)."  
+    exit 13  
+elif [ ! -f "$USER_FILE" ]; then  
+    echo "Error: User file '$USER_FILE' not found!"  
+    exit 44  
+else  
+    echo "Starting user creation process..."  
+    echo "---------------------------------"  
+fi
 ```
-Get-ChildItem
-Set-Location C:
-Get-ChildItem
-```
+**Expanded Explanation:**
 
-This can be compared to Linux commands:
+This part of the script ensures that the environment is properly set up before any user accounts are created. It checks that the script is being run with administrative (root) privileges and that the input file containing usernames actually exists. Let’s break it down line by line.
+```bash
+if [ "$EUID" -ne 0 ];
 ```
-ls
-cd /
-ls
-```
+Is checking:  
+> “Is the current user’s **Effective User ID** *not equal to 0*?”  
+If that’s true, the script knows you’re not root and stops execution.
 
-<img width="638" height="494" alt="image" src="https://github.com/user-attachments/assets/06fc5e5c-1661-4d40-98c8-f1d5c94da5ce" />
-<img width="307" height="74" alt="image" src="https://github.com/user-attachments/assets/4b8d03f4-9503-406e-9ffb-12e093594275" />
+- EUID tells the system *who* you are allowed to act as (your current permission level).
+- The **root user** always has a EUID of 0, so this check ensures only root can run privileged actions.
+- Even though EUID isn't defined in the script, it's a build-in shell variable that always exists in Bash and other POSIX shells.
+
+You can view your EUID by running:
+```bash
+id -u/user
+```
+Which outputs your EUID as well as your GID (Primary Group ID) and any groups the user belongs to.
 
 ---
 
-## **Step 3: Create Files and Directories with `New-Item`**
-
-The `New-Item` cmdlet allows you to create both files and directories. For example:
-```
-New-Item -Path "C:\PowerShellLab" -ItemType Directory
-New-Item -Path "C:\PowerShellLab\ServerReport.txt" -ItemType File
-```
-
-**Breakdown of Command:**
-
-| Parameter  | Description                               | Example                  |
-|------------|-------------------------------------------|--------------------------|
-| `-Path`    | Specifies the path where the item is created. | `"C:\PowerShellLab"`      |
-| `-ItemType` | Specifies the type of item to create.    | `Directory`, `File`, `SymbolicLink` |
-
-<img width="532" height="161" alt="image" src="https://github.com/user-attachments/assets/1d20991a-c246-4bda-8b02-9e03b9a85a63" />
-<img width="549" height="129" alt="image" src="https://github.com/user-attachments/assets/7809e95b-ac45-4f43-a111-8414dd67e838" />
+#### `-ne` (Not Equal)
+- `-ne` is a **numeric comparison operator** in Bash that means “not equal to.”  
+- It’s part of Bash’s test syntax used inside `[ ]` brackets.  
+- Example comparisons:
+  - `[ 3 -eq 3 ]` → true (equal)
+  - `[ 3 -ne 5 ]` → true (not equal)
+- In this case, `[ "$EUID" -ne 0 ]` means “if the user ID is not 0.”
 
 ---
 
-## **Step 4: File Integrity Validation with `Get-FileHash`**
-
-The `Get-FileHash` cmdlet computes a cryptographic hash (SHA256 by default) for a given file. A hash acts as a **digital fingerprint** — even a single character change will result in a different hash value.
-
-To check the hash of a file:
+#### `exit 13/66`
+- The `exit` command stops the script immediately and returns a code to the system.  
+- Exit codes tell the system *why* the script stopped.  
+- `13` and `66` are standard codes for **Permission Denied/File not found** respectfully, used here to indicate that the script failed because it wasn’t run with root privileges or that the file referenced was not in the specified directory.  
+- You can see the last exit code in any terminal with:
+```bash
+echo $?
 ```
-Get-FileHash -Path "ServerReport.txt"
-```
+---
 
-After appending content to the file:
+#### `[ ! -f "$USER_FILE" ]`
+This condition checks if the input file (`Users.txt`) **does not exist**.
 
-```
-Add-Content -Path "ServerReport.txt" -Value "CPU and Memory check: Normal"
-Get-FileHash -Path "ServerReport.txt"
-```
+Let’s break that down:
+- `-f` tests whether a file exists and is a **regular file**.  
+- `!` negates the condition, turning “file exists” into “file does not exist.”  
+- `$USER_FILE` is the variable that holds the path to your input file.  
 
-<img width="976" height="107" alt="image" src="https://github.com/user-attachments/assets/802e216d-69ff-4a8e-bb02-6f4098096c26" />
-<img width="974" height="117" alt="image" src="https://github.com/user-attachments/assets/70cee887-4712-4929-a15f-515ef99fb9f2" />
+So `[ ! -f "$USER_FILE" ]` means:  
+> “If the file specified by `$USER_FILE` does not exist, then do the following.”
+
+If that condition is true, the script prints an error and exits with code `44`.
+
+---
+
+#### `else`
+If both checks pass (you’re root and the file exists), the script executes the `else` block:
+```bash
+echo "Starting user creation process..."
+echo "---------------------------------"
+```
+This confirms the setup is valid and that the automation can safely continue.
+
+---
+
+#### Summary
+
+| Condition | Purpose | Outcome if True | Exit Code |
+|------------|----------|------------------|------------|
+| `[ "$EUID" -ne 0 ]` | Check if user is not root | Prints error and stops | `13` |
+| `[ ! -f "$USER_FILE" ]` | Check if `Users.txt` is missing | Prints error and stops | `44` |
+| `else` | Both checks passed | Starts the user creation process | — |
+
+In plain English:
+> “If you’re not root, stop with a permission error.  
+> If the username file doesn’t exist, stop with a file error.  
+> Otherwise, start creating users safely.”
+
+---
+
+## **Step 2: Read Usernames from File**
+
+Each line in `Users.txt` represents one username.  
+The script reads each name line-by-line using a `while` loop:
+
+```bash
+while IFS= read -r username; do
+    ...
+done < "$USER_FILE"
+```
 
 **Explanation:**
-
-- The hash value changes when the file's content changes.
-- This technique is used in cybersecurity to validate the integrity of system files. Any tampering or corruption will result in a mismatch between the stored and calculated hash values.
+- `IFS=` preserves spaces in usernames.  
+- `read -r` prevents backslashes from being treated as escape characters.  
+- The `< "$USER_FILE"` redirection feeds the file’s contents directly into the loop.  
 
 ---
 
-## **Real-World Cybersecurity Relevance**
+## **Step 3: Skip Empty Lines and Existing Users**
 
-File integrity monitoring (FIM) is a critical component of cybersecurity. By storing baseline hash values of important files, administrators can periodically compare the current hash against the stored one. If the hashes differ, it may indicate that the file has been altered, possibly due to malware or unauthorized modifications.
+Before creating new accounts, the script avoids unnecessary operations:
 
-Common tools like **Tripwire**, **OSSEC**, and **Splunk** use file hashes for similar integrity checks to detect malicious changes in system files, enforcing trust and security.
+```bash
+[ -z "$username" ] && continue
+
+if id "$username" &>/dev/null; then
+    echo "User $username already exists, skipping..." | tee -a "$LOG_FILE"
+    continue
+fi
+```
+
+**Explanation:**
+- `[ -z "$username" ]` skips empty lines in the file.  
+- `id "$username"` checks if the user already exists; if so, the script logs and skips them.  
+- The `tee -a` command logs messages both on screen and in the log file simultaneously.
+
+---
+
+## **Step 4: Create User and Assign Password**
+
+For each valid new username, the script executes:
+
+```bash
+useradd -m "$username" &>/dev/null
+
+echo "${username}:${DEFAULT_PASS}" | chpasswd
+
+passwd -e "$username" &>/dev/null
+```
+
+**Explanation:**
+- `useradd -m` creates the user and their home directory with the -m option.  
+- `chpasswd` securely sets the default password for automation using the pipe `|` operator (non-interactive).  
+- `passwd -e` forces a password reset on the next login for security with the -e option.
+
+---
+
+## **Step 5: Log the Creation Process**
+
+All successful operations are recorded in a log file:
+
+```bash
+echo "User $username created successfully." | tee -a "$LOG_FILE"
+```
+
+**Explanation:**
+- `tee -a` appends each success message to the log file (`Created_Users.log`).  
+- The `-a` flag ensures logs are not overwritten when the script is re-run.
+
+---
+
+## **Step 6: Script Execution and Output**
+
+**Run the script:**
+```bash
+sudo ./create_users.sh
+```
+
+**Output:**
+
+<img width="537" height="287" alt="image" src="https://github.com/user-attachments/assets/239b52b4-43f4-4951-8492-9b50433920fc" />
+
+---
+
+## **Step 7: Verify Results**
+
+After execution, verification is done using standard Linux commands.
+
+**Check log contents:**
+```bash
+cat Created_Users.log
+```
+<img width="386" height="176" alt="image" src="https://github.com/user-attachments/assets/a2f4f8ca-9333-47b5-87e0-7644177a372c" />
+
+**Verify account creation:**
+```bash
+id RussellAKADusty
+```
+
+<img width="711" height="74" alt="image" src="https://github.com/user-attachments/assets/c11baa9b-3fd9-4c64-848b-407a7339d853" />
+
+**Confirm home directories:**
+```bash
+ls /home
+```
+
+<img width="928" height="76" alt="image" src="https://github.com/user-attachments/assets/88325fea-0b62-4d92-b73f-5d9f1965a4bb" />
+
+
+**Check password status and logon:**
+```bash
+sudo chage -l RussellAKADusty
+```
+<img width="775" height="198" alt="image" src="https://github.com/user-attachments/assets/007e3ea3-8990-456d-966d-bb52acfd9937" />
+   
+```bash
+su - username
+```
+<img width="723" height="211" alt="image" src="https://github.com/user-attachments/assets/c5b2f7ae-009f-48dc-8b39-d676e1dd14a7" />
 
 ---
 
 ## **Summary**
 
-This project showcases how PowerShell can be utilized for essential system administration tasks, including process monitoring, file management, and integrity validation. It provides practical experience in automating system checks, ensuring secure operations, and improving administrative workflows through PowerShell scripting.
+This automation project demonstrates the ability to:
+- Use **Bash scripting** to streamline repetitive administrative tasks.  
+- Validate **root privileges** and required input files for secure execution.  
+- Create users, assign default passwords, and enforce **password resets** automatically.  
+- Log all actions to ensure transparency and traceability.  
+- Verify system changes through **user existence**, **home directory**, and **password expiration** checks.  
 
-By leveraging **PowerShell ISE**, this project aligns with both **IT operations** and **cybersecurity best practices**, providing a comprehensive introduction to automation and file integrity management.
-
---- 
-
-This version now includes space for both screenshots: one showing the initial use of `Get-Process`, and another showing the more efficient filtered version. Let me know if you need further adjustments!
-
-
+By completing this project, I gained hands-on experience in **file processing**, **text stream handling**, **permission management**, and **error control**, all of which are foundational skills for **Linux system administration**.
