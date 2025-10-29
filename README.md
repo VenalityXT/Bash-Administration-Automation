@@ -1,4 +1,4 @@
-# **PowerShell Administration Basics**
+ # **PowerShell Administration Basics**
 
 [![Windows](https://img.shields.io/badge/OS-Windows-blue?logo=windows)](https://learn.microsoft.com/en-us/powershell/)  
 [![PowerShell](https://img.shields.io/badge/Scripting-PowerShell-lightblue?logo=powershell)](https://learn.microsoft.com/en-us/powershell/)  
@@ -29,4 +29,6 @@ The script automates the process of monitoring system health, managing file stru
 The `Get-Process` cmdlet retrieves all running processes on the system. This can be useful for monitoring system health and identifying processes consuming excessive resources. However, the default output can be cluttered, making it hard to analyze effectively.
 
 To filter and sort the output for better readability:
-
+```
+Get-Process | Sort-Object CPU -Descending | Select-Object -First 10
+```
