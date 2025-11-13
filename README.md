@@ -21,7 +21,7 @@ As a **junior system administrator**, I developed a script that automates **user
 
 ---
 
-## **Objectives**
+## **Objectives** 
 
 1. Demonstrate the ability to leverage **Bash scripting** for repetitive administrative tasks.  
 2. Minimize errors compared to manual account setup.  
